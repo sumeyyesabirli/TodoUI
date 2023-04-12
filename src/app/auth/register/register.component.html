@@ -1,0 +1,51 @@
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-12">
+          <form [formGroup]="regForm" (ngSubmit)="register()">
+
+              <div class="form-group">
+                  <label for="name" class="fa fa-user"></label>
+                  <input type="text" placeholder="İsim" formControlName="name">
+                  <span class="text-danger" *ngIf="regForm.controls['name'].errors && regForm.controls['name'].touched">
+                    Hatalı İsim
+                  </span>
+              </div>
+
+              <div class="form-group">
+                  <label for="email" class="fa fa-envelope"></label>
+                  <input type="email" placeholder="Email" formControlName="email">
+                  <span class="text-danger" *ngIf="regForm.controls['email'].errors && regForm.controls['email'].touched">
+                      <br>Invalid Email Address
+                  </span>
+              </div>
+
+              <div class="form-group">
+                  <label for="password" class="fa fa-lock"></label>
+                  <input type="password" placeholder="Şifre" formControlName="password">
+                  <span class="text-danger" *ngIf="regForm.controls['password'].errors && regForm.controls['password'].touched">
+                      <br>En Az 6 Karakter Girin.
+                  </span>
+              </div>
+
+              <div class="form-group">
+                <label for="duplicatepassword" class="fa fa-lock"></label>
+                <input type="password" placeholder="Şifre" formControlName="duplicatepassword">
+                <span class="text-danger" *ngIf="regForm.hasError('mismatchedPasswords') && regForm.controls['duplicatepassword'].touched">
+                  <br>Şifreler Aynı Değil.
+                </span>
+              </div>
+
+              <div class="text-center">
+                  <button id="submitButton" type="submit" class="btn btn-primary" [disabled]="!regForm.valid">
+                      Kayıt Ol
+                  </button>
+              </div>
+
+              <div class="text-success" *ngIf="successMessage">
+                  {{regForm.value.email}} mailId is {{successMessage}}
+              </div>
+
+          </form>
+      </div>
+  </div>
+</div>
